@@ -4,10 +4,12 @@ import persistedReducer from './reducers/rootReducer';
 import { persistStore } from 'redux-persist';
 import { thunk } from 'redux-thunk';
 import customLoggerMiddleware from './customLoggerMiddleware';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const store = legacy_createStore(
   persistedReducer,
-  applyMiddleware(thunk,customLoggerMiddleware) 
+
+  composeWithDevTools( applyMiddleware(thunk,customLoggerMiddleware) )
 );
 
 const persistor = persistStore(store);
